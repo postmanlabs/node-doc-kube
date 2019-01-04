@@ -1,0 +1,177 @@
+
+body {
+  font-family: 'Helvetica Neue';
+  background: linear-gradient(transparent 60%, white), url(/static/cat-face2.jpg) no-repeat;
+  background-size: cover;
+}
+
+html, body {
+  height: 100%;
+}
+
+h3 {
+  padding: 5px;
+}
+
+.nav {
+  width: auto;
+  font-weight: bold;
+  display: block;
+  border-style: solid;
+  border-width: thin;
+  border-color: lightgray;
+  padding: 25px;
+  margin: 0;
+}
+
+.nav-brand {
+  width: 100px;
+  height: auto;
+  display: block;
+  font-size: 30px;
+  color: #5096FF;
+}
+
+.guts {
+  padding: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.guts {
+  margin: 0 0 50px 0;
+}
+
+
+/*initial call to action to enter original_url*/
+.message-contents {
+  margin: 0 0 50px 0;
+  height: 30px;
+  font-size: 15px;
+}
+#notes {
+  margin: 0 0 0 5px;
+  width: 400px;
+  line-height: 30px;
+  font-size: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: solid #5096FF 1px;
+  /* display: inline-block; */
+  float: left;
+  padding: 5px;
+  border-radius: 6px 0 0 6px;
+}
+/*button styling*/
+.btn {
+  width: 100px;
+  border-radius: 0 6px 6px 0;
+  background-color: #5096FF;
+  font-size: 15px;
+  border: solid #5096FF 1px;
+  float: left;
+  padding: 11px;
+  cursor: pointer;
+}
+.submit-btn {
+  background-color: #5096FF;
+  border: solid #5096FF 1px;
+}
+.copy-btn {
+  background-color: darkgray;
+  color: black;
+  border-color: darkgray;
+}
+.btn:hover {
+  background-color: #CCC72F;
+  color: black;
+  border-color: #CCC72F;
+}
+
+/*dynamic display of encode_url*/
+.display-contents {
+  margin: 0 0 50px 0;
+  line-height: 30px;
+}
+.display {
+  float: left;
+  padding: 5px;
+}
+.new-url {
+  width: 400px;
+  float: left;
+  border: solid 1px lightgray;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 6px 0 0 6px;
+  font-size: 15px;
+  line-height: 30px;
+  padding: 5px;
+}
+
+/*tooltip styling*/
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+
+/*footer elements*/
+#attribution {
+  padding: 5px;
+  margin: 250px 0 0 0;
+  position: absolute;
+  bottom: 35px;
+}
+
+.disclaimer {
+  font-size: 10px;
+  padding: 10px;
+  margin: 0 0 0 15px;
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+/*link styling*/
+a {
+  color: #5096FF;
+  text-decoration: none;
+}
+
+/* unvisited link */
+a:link {
+  color: #5096FF
+}
+
+/* visited link */
+a:visited {
+  color: #5096FF;
+}
+
+/* mouse over link */
+a:hover {
+  color: #CCC72F;
+  text-decoration: underline;
+}
+
+/* selected link */
+a:active {
+  color: #CCC72F;
+}
+
+.cf:before,
+.cf:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+
+.cf:after {
+  clear: both;
+}
