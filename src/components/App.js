@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../css/App.css';
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
@@ -20,7 +21,7 @@ class App extends Component {
             <form id="encoder">
               <div className="submit-encoder">
                 <h3>enter an original url to create a custom cat url: </h3>
-                <input type="text" id="notes" className="encode-text" value="https://www.google.com" />
+                <input type="text" id="notes" className="encode-text" value="https://www.google.com" autoFocus />
                 <input type="submit" className="btn submit-btn" value="cattify" />
               </div>
             </form>
