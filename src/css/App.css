@@ -1,7 +1,7 @@
 
 body {
   font-family: 'Helvetica Neue';
-  background: linear-gradient(transparent 60%, white), url(/static/cat-face2.jpg) no-repeat;
+  background: linear-gradient(transparent 60%, white), url(../img/cat-face2.jpg) no-repeat;
   background-size: cover;
 }
 
@@ -11,6 +11,13 @@ html, body {
 
 h3 {
   padding: 5px;
+}
+
+.snipe {
+  position: absolute; 
+  top: 0; 
+  right: 0; 
+  border: 0;
 }
 
 .nav {
