@@ -3,6 +3,36 @@ import '../css/App.css';
 
 class App extends Component {
 
+  state = {
+    value: ""
+  }
+
+  host = window.location.hostname;
+
+  handleChange = (event) => {
+    this.setState({
+      value: event.target.value
+    });
+  }
+
+  handleSubmit = (event) => {
+    // alert('A URL was submitted: ' + this.state.value);
+    event.preventDefault();
+
+    let data = {
+      url: this.refs['new-url'].value
+    };
+
+    fetch({
+      url: 'http://' + this.host + ':5432/add',
+      method: 'post',
+      body: JSON.stringify(data)
+    });
+
+    // this.props.onSubmit(data);
+    // this.refs['new-url'].reset();
+  }
+
   render() {
     return (
       <div className="App">
@@ -18,10 +48,10 @@ class App extends Component {
         <div className="guts">
 
           <div className="message-contents">
-            <form id="encoder">
+            <form id="encoder" onSubmit={this.handleSubmit}>
               <div className="submit-encoder">
                 <h3>enter an original url to create a custom cat url: </h3>
-                <input type="text" id="notes" className="encode-text" value="https://www.google.com" autoFocus />
+                <input type="text" id="notes" className="encode-text" ref="new-url" value={this.state.value} placeholder="http://www.google.com" onChange={this.handleChange} autoFocus />
                 <input type="submit" className="btn submit-btn" value="cattify" />
               </div>
             </form>
@@ -33,17 +63,17 @@ class App extends Component {
               </div>
 
               <div className="display">
-                  <input type="text" className="new-url" readonly />
+                  <input type="text" className="new-url" readOnly />
                   <input type="button" className="btn copy-btn" value="copy" data-clipboard-action="copy" data-clipboard-target=".new-url" />
               </div>
           </div>
 
           <div id="attribution">created by: <a href='http://www.github.com/loopDelicious'>Joyce Lin</a></div>
-          <div class='disclaimer'>
-            <p>Intended for entertainment use only. No guarantees made. No one endorses anything contained in the URLs. 
-              <div> {"\n"}{"\n"} </div>
+          <div className='disclaimer'>
+            <span>Intended for entertainment use only. No guarantees made. No one endorses anything contained in the URLs. 
+              <p> {"\n"}{"\n"} </p>
               CatURL is not responsible for any content linked through its service. Use at your own risk.  It's a litter bit amazing.
-            </p>
+            </span>
           </div>
         
         </div>

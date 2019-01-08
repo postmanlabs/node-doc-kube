@@ -98,8 +98,11 @@ h3 {
 
 /*dynamic display of encode_url*/
 .display-contents {
+  /* margin: 0 0 50px 0;
+  line-height: 30px; */
   margin: 0 0 50px 0;
-  line-height: 30px;
+  height: 30px;
+  font-size: 15px;
 }
 .display {
   float: left;
