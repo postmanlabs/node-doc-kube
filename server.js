@@ -3,10 +3,10 @@ const request = require('request');
 const bodyParser = require('body-parser');
 
 // import db model table and connection
-const createTables = require('./src/db/index');
+const createTables = require('./src/db/model');
 createTables.createTables();
 
-var app = express();
+const app = express();
 
 // allow CORS access
 app.use(function(req, res, next) {
@@ -25,18 +25,18 @@ app.get('*', (req, res) => res.status(200).send({
 }));
 
 // POST request to ADD a new url to db
-app.post('/add', function(req, res) {
+app.post('/add', function(req, res) { 
 
     var data = {
         url: req.body.url.toLowerCase()
     };
 
-    // var url = baseUrl + '/databases/fitness/collections/exercises?apiKey=' + key.mlab;
-    const url = 'http://localhost:5432/';
+    const baseUrl = 'http://localhost:5432/';
 
     request.post({
-        url: url,
-        body: JSON.stringify(data),
+        url: baseUrl,
+        // body: JSON.stringify(data),
+        // send sqlized query to url table
         headers: {
             'Content-Type': 'application/json'
         }

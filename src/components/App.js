@@ -23,11 +23,15 @@ class App extends Component {
       url: this.refs['new-url'].value
     };
 
-    fetch({
-      url: 'http://' + this.host + ':5432/add',
-      method: 'post',
-      body: JSON.stringify(data)
-    });
+    fetch('http://' + this.host + ':5500/add', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+    .then(response => console.log('Success:', JSON.stringify(response)))
+    .catch(error => console.error('Error:', error));
 
     // this.props.onSubmit(data);
     // this.refs['new-url'].reset();
