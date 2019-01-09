@@ -4,7 +4,10 @@ import '../css/App.css';
 class App extends Component {
 
   state = {
-    value: ""
+    value: "", 
+    validUrl: true,
+    encodedUrlReady: false,
+    encodedUrl: ""
   }
 
   host = window.location.hostname;
@@ -16,22 +19,39 @@ class App extends Component {
   }
 
   handleSubmit = (event) => {
-    // alert('A URL was submitted: ' + this.state.value);
     event.preventDefault();
 
     let data = {
-      url: this.refs['new-url'].value
+      originalUrl: this.refs['new-url'].value
     };
 
-    fetch('http://' + this.host + ':5500/add', {
+    fetch('http://' + this.host + ':5500/encode', {
       method: 'POST',
       body: JSON.stringify(data),
       headers:{
         'Content-Type': 'application/json'
       }
-    }).then(res => res.json())
-    .then(response => console.log('Success:', JSON.stringify(response)))
-    .catch(error => console.error('Error:', error));
+    }).then(response => {
+      console.log(response);
+      if (response.ok) {
+        response.json().then(json => {
+          console.log(json);
+          console.log(typeof(json));
+          if (json == "Try again") {
+            this.setState({
+              validUrl: false
+            });
+          } else {
+            console.log('display new url');
+            this.setState({
+              encodedUrlReady: true,
+              encodedUrl: json
+            })
+            // display new url
+          }
+        });
+      }
+    })
 
     // this.props.onSubmit(data);
     // this.refs['new-url'].reset();
@@ -61,16 +81,23 @@ class App extends Component {
             </form>
           </div>
 
-          <div className="display-contents">
+          {!this.state.validUrl ?
+            <div className="error-message">
+              <h3>Please enter a valid URL.</h3>
+            </div>
+            : null } 
+
+          {this.state.encodedUrlReady ?
+            <div className="display-contents">
               <div className='display-intro'>
                   <h3>is now: </h3>
               </div>
-
               <div className="display">
-                  <input type="text" className="new-url" readOnly />
+                  <input type="text" className="new-url" value={this.state.encodedUrl} readOnly />
                   <input type="button" className="btn copy-btn" value="copy" data-clipboard-action="copy" data-clipboard-target=".new-url" />
               </div>
-          </div>
+            </div>
+            : null }
 
           <div id="attribution">created by: <a href='http://www.github.com/loopDelicious'>Joyce Lin</a></div>
           <div className='disclaimer'>

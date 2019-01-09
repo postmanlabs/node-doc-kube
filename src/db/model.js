@@ -20,7 +20,7 @@ const createTables = () => {
 
     const queryText =
         `CREATE TABLE IF NOT EXISTS
-        urls(
+        urls (
             id UUID PRIMARY KEY,
             originalUrl VARCHAR(128) NOT NULL,
             catPath VARCHAR(128) NOT NULL
@@ -38,5 +38,6 @@ const createTables = () => {
 };
 
 module.exports = {
-    createTables
+    createTables,
+    client
 };

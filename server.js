@@ -1,10 +1,12 @@
 const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
+const fs = require ('fs');
 
 // import db model table and connection
-const createTables = require('./src/db/model');
-createTables.createTables();
+const model = require('./src/db/model');
+model.createTables();
+const client = model.client;
 
 const app = express();
 
@@ -24,30 +26,89 @@ app.get('*', (req, res) => res.status(200).send({
     message: 'Welcome to the beginning of nothingness.',
 }));
 
-// POST request to ADD a new url to db
-app.post('/add', function(req, res) { 
+// https://stackoverflow.com/a/3975573/6815074
+function validateURL(textval) {
+    const urlregex = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/;
+    return urlregex.test(textval);
+}
 
-    var data = {
-        url: req.body.url.toLowerCase()
-    };
+function urlize(originalurl) {
 
-    const baseUrl = 'http://localhost:5432/';
+    const catFile = fs.readFileSync("./src/seed.txt");
+    const catWords = catFile.toString().split("\n")
 
-    request.post({
-        url: baseUrl,
-        // body: JSON.stringify(data),
-        // send sqlized query to url table
-        headers: {
-            'Content-Type': 'application/json'
+    let need_new_url = true;
+    let catpath = ''
+
+    while (need_new_url) {
+
+        for (i = 0; i < 5; i++) { 
+            let word = catWords[Math.floor(Math.random() * catWords.length)];  // random cat word
+            let shouldUpper = Math.floor(Math.random() * 2);  // initiate randomizer for upper / lower case
+            shouldUpper ? word.toLowerCase() : word.toUpperCase();  // upper or lower case
+            let punctuation = Math.floor(Math.random() * 2);  // initiate randomizer for punctuation
+            punctuation ? word += '.' : word += '-';  // separate by . or -
+            catpath += word;
         }
-    }, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            res.send(body);
-        }
-        else {
-            res.status(400).send(body);
-        }
-    });
+
+        catpath = catpath.slice(0, -1);
+
+        // check if url already in db
+        // insert into db
+        // const text = `INSERT INTO urls (catpath) SELECT ${catPath} WHERE NOT EXISTS ( SELECT catpath FROM urls WHERE catpath = ${catPath}) )`
+        
+
+        const text = 'INSERT INTO urls (originalUrl, catPath) VALUES($1, $2) RETURNING *'
+        const values = [originalurl, catpath]
+        console.log(text);
+
+        client.query(text, values, (err, res) => {
+            if (err) {
+                console.log(err.stack)
+            } else {
+                console.log(res.rows[0])
+                need_new_url = false;
+                return res;
+            }
+        })
+        // if (!url in db) {
+        //     need_new_url = false;
+        //     return url or insert in db
+        // }   
+    }
+}
+
+// POST request to add a new url to db
+app.post('/encode', function(req, res) { 
+
+    const original_url = req.body.originalUrl.toLowerCase();
+
+    if (!validateURL(original_url)) {
+        res.json("Try again");
+    } else {
+        urlize(original_url);
+        res.json(original_url + " entered into the database");
+    }
+
+    //     const base = 'http://localhost:5432/';
+
+    //     // add original and new urls to db
+    //     request.post({
+    //         url: base,
+    //         // body: JSON.stringify(data),
+    //         // TODO: send sqlized query to url table
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     }, function (error, response, body) {
+    //         if (!error && response.statusCode == 200) {
+    //             res.send(body);
+    //         }
+    //         else {
+    //             res.status(400).send(body);
+    //         }
+    //     });
+    // }
 });
   
 app.listen(process.env.PORT || 5500);

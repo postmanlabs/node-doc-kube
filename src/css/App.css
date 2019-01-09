@@ -96,6 +96,10 @@ h3 {
   border-color: #CCC72F;
 }
 
+.error-message {
+  /* display: none; */
+}
+
 /*dynamic display of encode_url*/
 .display-contents {
   /* margin: 0 0 50px 0;
