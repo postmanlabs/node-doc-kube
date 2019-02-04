@@ -8,36 +8,62 @@ const client = new Client({
     port: 5432
 });
 
-client.connect((err) => {
-  if (err) {
-    console.error('connection error', err.stack);
-  } else {
-    console.log('connected to the db');
-  }
-});
+const clientConnect = () => {
+    
+    client.connect((err) => {
+        if (err) {
+            console.error('connection error', err.stack);
+        } else {
+            console.log('connected to the db');
+        }
+    });
+    
+};
 
 const createTables = () => {
 
     const queryText =
         `CREATE TABLE IF NOT EXISTS
         urls (
-            id UUID PRIMARY KEY,
-            originalUrl VARCHAR(128) NOT NULL,
-            catPath VARCHAR(128) NOT NULL
+            id SERIAL PRIMARY KEY,
+            originalurl VARCHAR(128) NOT NULL,
+            catpath VARCHAR(128) NOT NULL
         )`;
   
     client.query(queryText)
         .then((res) => {
             console.log(res);
-            client.end();
+            // client.end();
         })
         .catch((err) => {
             console.log(err);
-            client.end();
+            // client.end();
         });
+
+    // const secondQuery = 
+    //     `INSERT INTO urls (
+    //         originalurl, 
+    //         catpath
+    //         ) 
+    //     VALUES (
+    //         'https://www.cnn.com', 
+    //         'tuxedo.jump-pounce-,,,^..^,,,.lick'
+    //     );`;
+
+    // client.query(secondQuery)
+    //     .then((res) => {
+    //         console.log(res);
+    //         client.end();
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //         client.end();
+    //     });
+        
 };
 
 module.exports = {
     createTables,
-    client
+    client,
+    clientConnect
 };

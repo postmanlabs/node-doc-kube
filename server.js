@@ -5,6 +5,7 @@ const fs = require ('fs');
 
 // import db model table and connection
 const model = require('./src/db/model');
+model.clientConnect();
 model.createTables();
 const client = model.client;
 
@@ -32,17 +33,20 @@ function validateURL(textval) {
     return urlregex.test(textval);
 }
 
-function urlize(originalurl) {
+function encode(originalurl) {
 
     const catFile = fs.readFileSync("./src/seed.txt");
     const catWords = catFile.toString().split("\n")
 
     let need_new_url = true;
+
     let catpath = ''
 
     while (need_new_url) {
 
-        for (i = 0; i < 5; i++) { 
+        
+
+        for (i=0; i<5; i++) { 
             let word = catWords[Math.floor(Math.random() * catWords.length)];  // random cat word
             let shouldUpper = Math.floor(Math.random() * 2);  // initiate randomizer for upper / lower case
             shouldUpper ? word.toLowerCase() : word.toUpperCase();  // upper or lower case
@@ -50,32 +54,36 @@ function urlize(originalurl) {
             punctuation ? word += '.' : word += '-';  // separate by . or -
             catpath += word;
         }
-
+ 
         catpath = catpath.slice(0, -1);
 
-        // check if url already in db
-        // insert into db
-        // const text = `INSERT INTO urls (catpath) SELECT ${catPath} WHERE NOT EXISTS ( SELECT catpath FROM urls WHERE catpath = ${catPath}) )`
-        
-
-        const text = 'INSERT INTO urls (originalUrl, catPath) VALUES($1, $2) RETURNING *'
-        const values = [originalurl, catpath]
-        console.log(text);
-
-        client.query(text, values, (err, res) => {
-            if (err) {
-                console.log(err.stack)
-            } else {
-                console.log(res.rows[0])
-                need_new_url = false;
-                return res;
-            }
-        })
+        need_new_url = false;
         // if (!url in db) {
         //     need_new_url = false;
         //     return url or insert in db
         // }   
     }
+
+    if (catpath) {
+        const text = `INSERT INTO urls (originalurl, catpath) VALUES ('${originalurl}', '${catpath}');`
+        console.log(text);
+
+        client.query(text)
+            .then((res) => {
+                console.log(res);
+                // client.end();
+            })
+            .catch((err) => {
+                console.log(err);
+                // client.end();
+            });
+    }
+    
+}
+
+function decode(userpath) {
+    // search database for userpath
+    // if present, return https://<hostname>/catpath
 }
 
 // POST request to add a new url to db
@@ -86,7 +94,7 @@ app.post('/encode', function(req, res) {
     if (!validateURL(original_url)) {
         res.json("Try again");
     } else {
-        urlize(original_url);
+        encode(original_url);
         res.json(original_url + " entered into the database");
     }
 

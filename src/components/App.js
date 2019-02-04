@@ -37,7 +37,7 @@ class App extends Component {
         response.json().then(json => {
           console.log(json);
           console.log(typeof(json));
-          if (json == "Try again") {
+          if (json === "Try again") {
             this.setState({
               validUrl: false
             });
