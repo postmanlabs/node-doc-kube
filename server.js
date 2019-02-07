@@ -44,8 +44,6 @@ function encode(originalurl) {
 
     while (need_new_url) {
 
-        
-
         for (i=0; i<5; i++) { 
             let word = catWords[Math.floor(Math.random() * catWords.length)];  // random cat word
             let shouldUpper = Math.floor(Math.random() * 2);  // initiate randomizer for upper / lower case
@@ -65,8 +63,7 @@ function encode(originalurl) {
     }
 
     if (catpath) {
-        const text = `INSERT INTO urls (originalurl, catpath) VALUES ('${originalurl}', '${catpath}');`
-        console.log(text);
+        const text = `INSERT INTO urls (originalurl, catpath) VALUES ('${originalurl}', '${catpath}') RETURNING catpath, id;`
 
         client.query(text)
             .then((res) => {
@@ -77,6 +74,8 @@ function encode(originalurl) {
                 console.log(err);
                 // client.end();
             });
+
+        return catpath;
     }
     
 }
@@ -94,8 +93,8 @@ app.post('/encode', function(req, res) {
     if (!validateURL(original_url)) {
         res.json("Try again");
     } else {
-        encode(original_url);
-        res.json(original_url + " entered into the database");
+        let catpath = encode(original_url);
+        res.json(catpath);
     }
 
     //     const base = 'http://localhost:5432/';

@@ -35,19 +35,15 @@ class App extends Component {
       console.log(response);
       if (response.ok) {
         response.json().then(json => {
-          console.log(json);
-          console.log(typeof(json));
           if (json === "Try again") {
             this.setState({
               validUrl: false
             });
           } else {
-            console.log('display new url');
             this.setState({
               encodedUrlReady: true,
-              encodedUrl: json
+              encodedUrl: `https://${json}`
             })
-            // display new url
           }
         });
       }
