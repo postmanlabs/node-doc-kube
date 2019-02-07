@@ -39,7 +39,6 @@ function encode(originalurl) {
     const catWords = catFile.toString().split("\n")
 
     let need_new_url = true;
-
     let catpath = ''
 
     while (need_new_url) {
@@ -56,13 +55,11 @@ function encode(originalurl) {
         catpath = catpath.slice(0, -1);
 
         need_new_url = false;
-        // if (!url in db) {
-        //     need_new_url = false;
-        //     return url or insert in db
-        // }   
+  
     }
 
     if (catpath) {
+
         const text = `INSERT INTO urls (originalurl, catpath) VALUES ('${originalurl}', '${catpath}') RETURNING catpath, id;`
 
         client.query(text)
@@ -76,13 +73,9 @@ function encode(originalurl) {
             });
 
         return catpath;
-    }
-    
-}
 
-function decode(userpath) {
-    // search database for userpath
-    // if present, return https://<hostname>/catpath
+    } 
+
 }
 
 // POST request to add a new url to db
@@ -97,25 +90,18 @@ app.post('/encode', function(req, res) {
         res.json(catpath);
     }
 
-    //     const base = 'http://localhost:5432/';
+});
 
-    //     // add original and new urls to db
-    //     request.post({
-    //         url: base,
-    //         // body: JSON.stringify(data),
-    //         // TODO: send sqlized query to url table
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     }, function (error, response, body) {
-    //         if (!error && response.statusCode == 200) {
-    //             res.send(body);
-    //         }
-    //         else {
-    //             res.status(400).send(body);
-    //         }
-    //     });
-    // }
+function decode(userpath) {
+    // search database for userpath
+    // if present, return https://<hostname>/catpath
+}
+
+// For a user who enters encoded cat url in a browser, redirect to the original url.
+app.post('/:catpath', function(req, res) { 
+
+
+    
 });
   
 app.listen(process.env.PORT || 5500);

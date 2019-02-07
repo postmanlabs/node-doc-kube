@@ -39,26 +39,6 @@ const createTables = () => {
             console.log(err);
             // client.end();
         });
-
-    // const secondQuery = 
-    //     `INSERT INTO urls (
-    //         originalurl, 
-    //         catpath
-    //         ) 
-    //     VALUES (
-    //         'https://www.cnn.com', 
-    //         'tuxedo.jump-pounce-,,,^..^,,,.lick'
-    //     );`;
-
-    // client.query(secondQuery)
-    //     .then((res) => {
-    //         console.log(res);
-    //         client.end();
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //         client.end();
-    //     });
         
 };
 
