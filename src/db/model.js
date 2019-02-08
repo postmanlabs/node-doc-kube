@@ -1,12 +1,12 @@
 const { Client } = require('pg');
 
 const client = new Client({
-    // user: 'dbuser',
-    host: 'localhost',
-    database: 'caturl',
-    // password: 'secretpassword',
-    port: 5432
-});
+  user: process.env.DB_USER || null,
+  host: process.env.DB_HOST || 'localhost',
+  database: process.env.DB_NAME || 'caturl',
+  password: process.env.DB_PASSWORD || null,
+  port: process.env.DB_PORT || 5432
+})
 
 const clientConnect = () => {
     
