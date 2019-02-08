@@ -1,0 +1,9 @@
+version: "2"
+services:
+  postgres:
+    image: postgres:10
+    restart: on-failure
+    env_file:
+      - .env.development
+    ports:
+      - 5432
