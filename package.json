@@ -6,6 +6,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "fs": "0.0.1-security",
+    "nodemon": "^1.18.10",
     "pg": "^7.7.1",
     "pg-promise": "^8.5.4",
     "react": "^16.7.0",
@@ -15,6 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-server": "./bin/dev_server.sh",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
