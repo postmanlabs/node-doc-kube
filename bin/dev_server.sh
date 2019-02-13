@@ -13,7 +13,7 @@ function getPort {
 
 # Source development environment variables (postgres)
 set -a
-source .env.development
+source .env.development.local
 set +a
 
 DB_NAME=$POSTGRES_DB \
