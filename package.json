@@ -34,7 +34,7 @@
   ],
   "deploy-to-kube": {
     "prod": {
-      "entrypoint": "server.js",
+      "entrypoint": "src/services/server.js",
       "context": "kubesail-loopdelicious",
       "registry": "index.docker.io/v1/",
       "port": 5500,

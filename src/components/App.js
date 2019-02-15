@@ -32,7 +32,7 @@ class App extends Component {
         'Content-Type': 'application/json'
       }
     }).then(response => {
-      console.log(response);
+      // console.log(response);
       if (response.ok) {
         response.json().then(json => {
           if (json === "Try again") {

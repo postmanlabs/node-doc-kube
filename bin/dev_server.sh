@@ -25,4 +25,4 @@ DB_PORT="$(getPort postgres 5432/tcp)" \
     --inspect \
     --ignore src/components \
     --ignore src/css \
-    server.js
+    src/services/server.js

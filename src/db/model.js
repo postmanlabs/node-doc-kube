@@ -20,6 +20,15 @@ const clientConnect = () => {
     
 };
 
+const query = (text, values, cb) => {
+    client.connect(function(err, client, done) {
+      client.query(text, values, function(err, result) {
+        done();
+        cb(err, result);
+      })
+    });
+ }
+
 const createTables = () => {
 
     const queryText =
@@ -45,5 +54,6 @@ const createTables = () => {
 module.exports = {
     createTables,
     client,
-    clientConnect
+    clientConnect,
+    query
 };
