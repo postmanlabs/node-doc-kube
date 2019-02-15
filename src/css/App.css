@@ -123,6 +123,10 @@ h3 {
   padding: 5px;
 }
 
+.copied {
+  background-color: whitesmoke;
+}
+
 /*tooltip styling*/
 .tooltip .tooltiptext::after {
   content: " ";

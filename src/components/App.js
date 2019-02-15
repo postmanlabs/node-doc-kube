@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import '../css/App.css';
 
 class App extends Component {
@@ -7,7 +8,8 @@ class App extends Component {
     value: "", 
     validUrl: true,
     encodedUrlReady: false,
-    encodedUrl: ""
+    encodedUrl: "",
+    copied: false
   }
 
   host = window.location.hostname;
@@ -42,7 +44,7 @@ class App extends Component {
           } else {
             this.setState({
               encodedUrlReady: true,
-              encodedUrl: `https://${json}`
+              encodedUrl: `https://${this.host}/${json}`
             })
           }
         });
@@ -89,8 +91,16 @@ class App extends Component {
                   <h3>is now: </h3>
               </div>
               <div className="display">
-                  <input type="text" className="new-url" value={this.state.encodedUrl} readOnly />
-                  <input type="button" className="btn copy-btn" value="copy" data-clipboard-action="copy" data-clipboard-target=".new-url" />
+                  <input type="text" className={this.state.copied ? "copied new-url" : "new-url"} value={this.state.encodedUrl} readOnly />
+
+                  <CopyToClipboard text={this.state.encodedUrl}
+                    className="btn copy-btn"
+                    onCopy={() => this.setState({copied: true})}>
+                    <button>copy</button>
+                  </CopyToClipboard>
+
+                  {/* {this.state.copied ? <span style={{color: 'red'}}>Copied.</span> : null} */}
+                  {/* <input type="button" className="btn copy-btn" value="copy" data-clipboard-action="copy" data-clipboard-target=".new-url" /> */}
               </div>
             </div>
             : null }

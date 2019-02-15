@@ -27,7 +27,7 @@ const query = (text, values, cb) => {
         cb(err, result);
       })
     });
- }
+}
 
 const createTables = () => {
 
