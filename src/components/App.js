@@ -13,6 +13,7 @@ class App extends Component {
   }
 
   host = window.location.hostname;
+  port = window.location.port;
 
   handleChange = (event) => {
     this.setState({
@@ -44,7 +45,8 @@ class App extends Component {
           } else {
             this.setState({
               encodedUrlReady: true,
-              encodedUrl: `https://${this.host}/${json}`
+              validUrl: true,
+              encodedUrl: `https://${this.host}:${this.port}/${json}`
             })
           }
         });
@@ -85,7 +87,7 @@ class App extends Component {
             </div>
             : null } 
 
-          {this.state.encodedUrlReady ?
+          {this.state.encodedUrlReady && this.state.validUrl ?
             <div className="display-contents">
               <div className='display-intro'>
                   <h3>is now: </h3>
