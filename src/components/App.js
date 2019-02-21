@@ -46,7 +46,7 @@ class App extends Component {
             this.setState({
               encodedUrlReady: true,
               validUrl: true,
-              encodedUrl: `https://${this.host}:${this.port}/${json}`
+              encodedUrl: `http://${this.host}:${this.port}/${json}`
             })
           }
         });

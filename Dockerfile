@@ -18,5 +18,5 @@ COPY . /app/
 
 USER nodejs
 
-CMD ["node", "server.js"]
+CMD ["node", "src/services/server.js"]
       

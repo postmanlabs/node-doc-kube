@@ -8,7 +8,7 @@ const app = express();
 
 // import db model table and connection
 const model = require('../db/model');
-// model.clientConnect();
+model.clientConnect();
 model.createTables();
 
 // allow CORS access
@@ -22,10 +22,6 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-app.get('*', (req, res) => res.status(200).send({
-    message: 'Welcome to the beginning of nothingness.',
-}));
 
 // POST request to add a new url to db
 app.post('/encode', function(req, res) { 

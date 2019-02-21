@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cat-pg-prod
+spec:
+  selector:
+    matchLabels:
+      app: cat-pg-prod
+      env: prod
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cat-pg-prod
+        env: prod
+    spec:
+      volumes: []
+      containers:
+        - name: cat-pg-prod
+          image: 'postgres:11'
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 5500
+          resources:
+            requests:
+              cpu: 1m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+      volumes:
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: postgres-pv-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: cat-pg-prod
+  name: postgres-pv-claim
+spec:
+  dataSource: null
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: rook-block

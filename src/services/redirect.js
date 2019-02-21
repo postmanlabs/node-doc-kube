@@ -4,22 +4,28 @@ const client = model.client;
 
 const redirect = (userpath) => {
 
-    let originalurl = '';
-
-    const text = `SELECT originalurl FROM urls WHERE catpath='${userpath} LIMIT 1;` 
+    const text = `SELECT originalurl FROM urls WHERE catpath = '${userpath}' LIMIT 1;` 
 
     client.query(text)
         .then((res) => {
-            originalurl = res;
-            console.log(res);
+
+            if (res.originalurl) {
+                const original = res.originalurl;
+                const destination = '';
+                if (original.slice(0,7) == "http://" || original.slice(0,8) == "https://") { 
+                    destination = original
+                } else {
+                    destination =  "//" + original
+                }
+                return res.redirect(destination);
+            } else {
+                return "No URL found."
+            }
         })
         .catch((err) => {
             console.log(err);
+            return res.redirect(errorUrl);
         });
-
-    if (originalurl) {
-        return originalurl
-    }
 
 }
 

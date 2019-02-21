@@ -10,8 +10,16 @@ Redoing [cat-url-mangler](https://github.com/loopDelicious/cat-url-mangler) in N
     npm install // install dependencies
     npm start // start app, running on 3000
     npm run start-server // start server on 5500, automatically starts postgres inside a docker container
-    npm run psql // start postgress locally
+    npm run psql // see postgres locally
 
 ### For Production
 
-    npm run deploy // deploy to production via kubesail, if first time deploying via kubesail, you will be prompted to answer a series of questions https://kubesail.com/blog/deploying-node-apps-the-right-way
+    npm run deploy // deploy to production via kubesail
+
+For the first time deploying via kubesail, you will be prompted to answer a series of questions https://kubesail.com/blog/deploying-node-apps-the-right-way 
+    
+  * ? What is your application's entrypoint? src/services/server.js
+
+### Working with docker
+
+If you want to see your postgres container in docker, run `docker ps`. It should be named something like `caturl_postgres_1`. If you want to delete the container (and all the data in the db), stop the container with `docker stop caturl_postgres_1` and then delete the container with `docker rm caturl_postgres_1` and a new container will be created next time you start your app.
