@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// maintain state of encoded URLs
+// to maintain state of encoded URLs
 const urlMap = {};
 
 // https://stackoverflow.com/a/3975573/6815074
@@ -32,10 +32,14 @@ app.post('/encode', function(req, res) {
 
     const originalUrl = req.body.originalUrl.toLowerCase();
 
+    // check if valid URL 
     if (!validateURL(originalUrl)) {
+
         res.json("Try again");
+
     } else {
         
+        // generate a new URL
         const catFile = fs.readFileSync("./src/seed.txt");
         const catWords = catFile.toString().split("\n")
     
@@ -59,10 +63,14 @@ app.post('/encode', function(req, res) {
     
         }
 
+        // save the association between the original url and new url path
         if (catpath) {
+
             urlMap[catpath] = originalUrl;
             res.json(catpath);
+
         }  
+
     }
 
 });
@@ -70,8 +78,6 @@ app.post('/encode', function(req, res) {
 // For a user who enters encoded cat url in a browser, redirect to the original url.
 app.get('/:catpath', function(req, res) { 
 
-    console.log(req.params.catpath);
-    console.log(urlMap);
     if (urlMap[req.params.catpath]) {
 
         return res.redirect(urlMap[req.params.catpath]);

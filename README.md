@@ -7,7 +7,7 @@ Redoing [cat-url-mangler](https://github.com/loopDelicious/cat-url-mangler) in N
 ### For Development
 
     npm install // install dependencies
-    npm start // start app, running on 3000
+    npm start // start app on 3000
     npm run start-server // start server on 5500
 
 ### For Production
@@ -16,5 +16,6 @@ Redoing [cat-url-mangler](https://github.com/loopDelicious/cat-url-mangler) in N
 
 For the first time deploying via kubesail, you will be prompted to answer a series of questions https://kubesail.com/blog/deploying-node-apps-the-right-way 
     
-  * ? What is your application's entrypoint? src/services/server.js
+    ? What is your application's entrypoint? e.g. src/services/server.js
+    ? Which protocol does your application speak? e.g. http
 
