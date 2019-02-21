@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import '../css/App.css';
 
+const redirectTarget = process.env.REACT_APP_HOST || 'http://localhost:5500';
+
 class App extends Component {
 
   state = {
@@ -14,7 +16,7 @@ class App extends Component {
 
   host = window.location.hostname;
   port = window.location.port;
-
+  
   handleChange = (event) => {
     this.setState({
       value: event.target.value
@@ -28,7 +30,7 @@ class App extends Component {
       originalUrl: this.refs['new-url'].value
     };
 
-    fetch('http://' + this.host + ':5500/encode', {
+    fetch(`${redirectTarget}/encode`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers:{
@@ -46,7 +48,7 @@ class App extends Component {
             this.setState({
               encodedUrlReady: true,
               validUrl: true,
-              encodedUrl: `http://${this.host}:${this.port}/${json}`
+              encodedUrl: `${redirectTarget}/${json}`
             })
           }
         });
