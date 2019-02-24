@@ -19,7 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npx deploy-to-kube"
+    "deploy": "./bin/deploy.sh"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -40,5 +40,8 @@
       "registryUsername": "joycelin1600",
       "confirm": true
     }
+  },
+  "devDependencies": {
+    "newman": "^4.4.0"
   }
 }

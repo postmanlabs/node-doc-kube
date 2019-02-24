@@ -12,7 +12,7 @@ Redoing [cat-url-mangler](https://github.com/loopDelicious/cat-url-mangler) in N
 
 ### For Production
 
-    npm run deploy // deploy to production via kubesail
+    npm run deploy // run API tests, then deploy front end and backend to production 
 
 For the first time deploying via kubesail, you will be prompted to answer a series of questions https://kubesail.com/blog/deploying-node-apps-the-right-way 
     

@@ -32,6 +32,11 @@ app.post('/encode', function(req, res) {
 
     const originalUrl = req.body.originalUrl.toLowerCase();
 
+    // in postman
+    // raw body, json >> form data
+    // response "text" >> json object
+
+
     // check if valid URL 
     if (!validateURL(originalUrl)) {
 
@@ -67,7 +72,10 @@ app.post('/encode', function(req, res) {
         if (catpath) {
 
             urlMap[catpath] = originalUrl;
-            res.json(catpath);
+            res.json({
+                error: null,
+                catpath: catpath
+            });
 
         }  
 
