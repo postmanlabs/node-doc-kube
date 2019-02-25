@@ -146,11 +146,11 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "d3e531c4-a052-4b67-9d5d-f7682cd5b7d0",
+						"id": "c6a8f33f-ed76-46c1-8e15-6295e39ecd4b",
 						"exec": [
 							"// under your Postman Settings, make sure you toggle OFF `Automatically follow redirects` so you can examine the location before the redirect",
 							"",
-							"const target = responseHeaders.Location;",
+							"const target = responseHeaders.location || responseHeaders.Location;",
 							"",
 							"pm.test(\"Redirect to the original URL\", () => {",
 							"    const original = pm.environment.get(\"originalUrl\");",
