@@ -45,10 +45,11 @@ class App extends Component {
               validUrl: false
             });
           } else {
+            let path = json.catpath;
             this.setState({
               encodedUrlReady: true,
               validUrl: true,
-              encodedUrl: `${redirectTarget}/${json}`
+              encodedUrl: `${redirectTarget}/${path}`
             })
           }
         });

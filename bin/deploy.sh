@@ -1,29 +1,36 @@
 # terminate on any error
 set -e
 
-. .env.local
+. .env
 
 npm build
 
+
 # ********* RUN TESTS *********
 
-# run API tests, failed test(s) return a 1 (error)
-# this is running tests against local server
-# newman run collection.json -e environment.json
+# run API tests against a local server, failed test(s) return a 1 (error) and terminate this script
+
+# # [GOOD PRACTICE] run your tests against a local server
+# # requires your Postman collection and environment files to be located within the project directory
+# # formatted like: newman run <name-of-collection.json> -e <name-of-environment.json>
+# newman run catURL.postman_collection.json -e catURL-local.postman_environment.json
+
+# # [BETTER PRACTICE] run your tests using the Postman API (https://docs.api.getpostman.com/) to retrieve the latest versions of your collection and environment
+# # requires collection UID, environment UID, and your Postman API key 
+# # formatted like: newman run <authenticated-GET-collection-request> -e <authenticated-GET-environment-request>
 # newman run https://api.getpostman.com/collections/1559979-96d5b0b0-5bb7-4f48-a220-b30f1eb15235?apikey=ac2c5f4081644e5aa666e151494a7992 -e ENV-request
 
-
-# build and run backend on container with identical dependencies
-# spin up local container running on port 5501
-# run tests against localhost:5501
-docker build -f Dockerfile.backend . -t backend
+# [BEST PRACTICE] run your tests against a local container that exactly replicates your production environment
+# also requires collection UID, environment UID, and your Postman API key
+# build and run backend on a local container on port 5501, then run tests against localhost:5501
+docker build -f Dockerfile . -t backend
 docker stop test_backend_run
 docker rm test_backend_run
 docker run -p 5501:5500 -d --name test_backend_run backend
-# newman run Postman\ Echo.postman_collection.json
+# use a Postman environment switch tests over to run against container on http://localhost:5501
+newman run https://api.getpostman.com/collections/1559979-96d5b0b0-5bb7-4f48-a220-b30f1eb15235?apikey=${POSTMAN_API_KEY} -e https://api.getpostman.com/environments/1559979-b79220a2-959f-46f2-877c-e4024d93385?apikey=${POSTMAN_API_KEY}
 docker stop test_backend_run
-# {{https://localhost:5501}}
-# newman run https://api.getpostman.com/collections/1559979-96d5b0b0-5bb7-4f48-a220-b30f1eb15235?apikey=${POSTMAN_API_KEY}
+
 
 # ********* DEPLOY TO PRODUCTION *********
 
