@@ -7,6 +7,7 @@
     "express": "^4.16.4",
     "fs": "0.0.1-security",
     "nodemon": "^1.18.10",
+    "prettier": "^1.16.4",
     "react": "^16.7.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.7.0",
