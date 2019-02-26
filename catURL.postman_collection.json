@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "96d5b0b0-5bb7-4f48-a220-b30f1eb15235",
 		"name": "catURL",
+		"description": "We'll start with a simple Node app that functions like a URL shortener. In our case, we'll transform one URL into a different one using cat verbs, cat adjectives, and cat emojis 🐱 - and when you input your custom URL into a browser, you'll be redirected back to the original website.\n\n![[catURL website](https://i.imgur.com/yypLUxZ.jpg)](https://i.imgur.com/yypLUxZ.jpg)\n\n### Get started\n\nThis collection and environment was originally used as an example in [Deploying a scalable web application with Docker and Kubernetes](link) from the [Postman Engineering blog](https://medium.com/postman-engineering).\n\nIf you want to follow along, go ahead and fork [this example](link to github) and follow the README steps to spin up a local version of these APIs. \n\nThe beauty of using containers is that even if I'm developing this example on a machine with my Operating System and a different version of Node, you can rely on my container image to prescribe the exact specifications you'll need to run the same application seamlessly on your machine, or in the cloud, or wherever you choose to deploy.\n\n### Test the redirect\n\nSince we're working with redirects, let's set up Postman so we can properly test these requests. By default, Postman will follow a redirect -- unless we tell it not to.\n\n* To run the `redirect test` request, make sure you have `Automatically follow redirects` toggled OFF under the general [Postman app settings](https://learning.getpostman.com/docs/postman/launching_postman/settings#general-settings). \n* To run the collection in the Postman app via [collection runner](https://learning.getpostman.com/docs/postman/collection_runs/starting_a_collection_run), make sure you have the same `Automatically follow redirects` toggled OFF.\n*  To run the collection using Postman's command line runner [Newman](https://github.com/postmanlabs/newman), make sure you include the flag `--ignore-redirects ` with your command.\n*  To run the collection from the Postman cloud using a [monitor](https://learning.getpostman.com/docs/postman/monitors/setting_up_monitor), make sure you check the box that says `Don't follow redirects`.\n\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -59,7 +60,7 @@
 						"encode"
 					]
 				},
-				"description": "This endpoint will encode your original url into a new catURL, returning the new path.\n\nFor example, try submitting `https://www.getpostman.com` as the originalUrl in the request body. The response is a json object containing a `catpath` composed of cat words and emojis. Now change the value of `originalUrl` to a different URL, hit send, and inspect the response."
+				"description": "This endpoint will encode your original url into a new catURL, returning the new path.\n\nFor example, try submitting `https://www.getpostman.com` as the `originalUrl` in the request body. The response is a json object containing a `catpath` composed of cat words and emojis like `\"stalk.sleepy-bombay-scratch.whisker\"`. You can also review the saved example.\n\nNow change the value of `originalUrl` to a different URL, hit send, and inspect the response."
 			},
 			"response": [
 				{
@@ -183,7 +184,7 @@
 						"{{path}}"
 					]
 				},
-				"description": "This endpoint will begin redirecting your cat URL to your originally submitted URL. We will stop it before following the redirect to verify the redirection is going to the originally submitted URL.\n\n*Note*: Under your Settings, make sure you have `Automatically follow redirects` toggled OFF.\n\nFor example, update the `path` environment variable with the cat path you received in the previous request. You will be redirected to your originally submitted URL."
+				"description": "This endpoint will begin redirecting your cat URL to your originally submitted URL. We will stop it before following the redirect to verify the redirection is going to the originally submitted URL.\n\nFor example, update the `path` environment variable with the cat path you received in the previous request. You will be redirected to your originally submitted URL.\n\n*Note*: Make sure you have Postman set up properly to [not follow the redirect](#test-the-redirect). Then, when you send this request, look under the *Headers* tab of the response viewer down at the bottom. Find the Location header to inspect the target for the redirect."
 			},
 			"response": [
 				{
@@ -289,7 +290,7 @@
 						"{{path}}"
 					]
 				},
-				"description": "This endpoint will redirect your cat URL to your originally submitted URL.\n\n*Note*: Under your Settings, make sure you have `Automatically follow redirects` toggled ON.\n\nFor example, update the `path` environment variable with the cat path you received in the previous request. You will be redirected to your originally submitted URL, and can review the webpage in the response body."
+				"description": "This endpoint will redirect your cat URL to your originally submitted URL.\n\n*Note*: To run this request, make sure you have `Automatically follow redirects` toggled ON under your general Postman settings.\n\nFor example, update the `path` environment variable with the cat path you received in the previous request. You will be redirected to your originally submitted URL, and can review the webpage in the response body.\n"
 			},
 			"response": [
 				{
