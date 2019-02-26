@@ -17,7 +17,7 @@ npm build
 # # [BETTER PRACTICE] run your tests using the Postman API (https://docs.api.getpostman.com/) to retrieve the latest versions of your collection and environment
 # # requires collection UID, environment UID, and your Postman API key 
 # # formatted like: newman run <authenticated-GET-collection-request> -e <authenticated-GET-environment-request> --ignore-redirects
-# newman run https://api.getpostman.com/collections/1559979-96d5b0b0-5bb7-4f48-a220-b30f1eb15235?apikey=ac2c5f4081644e5aa666e151494a7992 -e https://api.getpostman.com/environments/1559979-b79220a2-959f-46f2-877c-e4024d93385?apikey=${POSTMAN_API_KEY} --ignore-redirects
+# newman run https://api.getpostman.com/collections/1559645-9f5aa83b-666d-41ef-9b91-6c3ec25ef789?apikey=ac2c5f4081644e5aa666e151494a7992 -e https://api.getpostman.com/environments/1559645-b5c093e1-bf72-4f7e-b18a-11263f21ec32?apikey=${POSTMAN_API_KEY} --ignore-redirects
 
 # [BEST PRACTICE] run your tests against a local container that exactly replicates your production environment
 # also requires collection UID, environment UID, and your Postman API key
@@ -26,7 +26,7 @@ docker build -f Dockerfile . -t backend
 docker run -p 5501:5500 -d --name test_backend_run backend
 # use a Postman environment switch tests over to run against container on http://localhost:5501
 set +e
-newman run https://api.getpostman.com/collections/1559979-96d5b0b0-5bb7-4f48-a220-b30f1eb15235?apikey=${POSTMAN_API_KEY} -e https://api.getpostman.com/environments/1559979-b79220a2-959f-46f2-877c-e4024d93385?apikey=${POSTMAN_API_KEY} --ignore-redirects
+newman run https://api.getpostman.com/collections/1559645-9f5aa83b-666d-41ef-9b91-6c3ec25ef789?apikey=${POSTMAN_API_KEY} -e https://api.getpostman.com/environments/1559645-be4012af-b66d-420b-8464-665618e9c48e?apikey=${POSTMAN_API_KEY} --ignore-redirects
 EXIT_CODE=$?
 docker stop test_backend_run
 docker rm test_backend_run
