@@ -46,6 +46,7 @@ docker build -f Dockerfile.ui . -t joycelin1600/cat-ui:${GIT_REV} -t joycelin160
 docker push joycelin1600/cat-ui:${GIT_REV}
 
 # tell kubernetes to use newest UI image
+kubectl apply -f deployment-ui-prod.yaml
 kubectl set image deployment/cat-ui cat-ui=joycelin1600/cat-ui:${GIT_REV}
 
 # deploy backend to kubernetes

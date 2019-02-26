@@ -25,5 +25,5 @@ The underlying deployment command [`npx deploy-to-kube`](https://github.com/kube
     ? What is your application's entrypoint? e.g. src/services/server.js
     ? Which protocol does your application speak? e.g. http
 
-I used [Kubesail](https://kubesail.com/) a hosted Kubernetes provider that offers a free managed namespace. However, [`npx deploy-to-kube`](https://github.com/kubesail/deploy-to-kube) supports any Kubernetes cluster. By running it inside your app's directory, this utility will generate a Dockerfile, build and push deployment images, generate Kubernetes configurations files, and trigger a deployment on your kubernetes cluster. 
+I used [Kubesail](https://kubesail.com/) a hosted Kubernetes provider that creates a free managed namespace. However, [`npx deploy-to-kube`](https://github.com/kubesail/deploy-to-kube) supports any Kubernetes cluster. By running it inside your app's directory, this utility will generate a Dockerfile, build and push deployment images, generate Kubernetes configurations files, and trigger a deployment on your kubernetes cluster. If don't already have a kubernetes cluster (and are not using Kubesail), you will need to select a Kubernetes provider and 
 
