@@ -44,7 +44,6 @@ GIT_REV=$(git rev-parse --short HEAD)
 
 # build docker container for front end, and tag container name
 docker build -f Dockerfile.ui . -t ${DOCKER_HUB_USERNAME}/cat-ui:${GIT_REV} -t ${DOCKER_HUB_USERNAME}/cat-ui:prod
-
 docker push ${DOCKER_HUB_USERNAME}/cat-ui:${GIT_REV}
 
 # deploy backend to kubernetes
