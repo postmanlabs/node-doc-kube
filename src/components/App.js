@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import '../css/App.css';
 
-const redirectTarget = process.env.REACT_APP_HOST || 'http://localhost:5500';
+const redirectTarget = process.env.NODE_ENV == 'production' ? process.env.REACT_APP_HOST : 'http://localhost:5500';
 
 class App extends Component {
 
