@@ -1,3 +1,5 @@
+# JOYCE DELETE THIS FILE ~/.kube/config THEN re run deploy.sh
+
 # terminate on any error
 set -e
 
@@ -41,13 +43,14 @@ set -e
 GIT_REV=$(git rev-parse --short HEAD)
 
 # build docker container for front end, and tag container name
-docker build -f Dockerfile.ui . -t joycelin1600/cat-ui:${GIT_REV} -t joycelin1600/cat-ui:prod
+docker build -f Dockerfile.ui . -t ${DOCKER_HUB_USERNAME}/cat-ui:${GIT_REV} -t ${DOCKER_HUB_USERNAME}/cat-ui:prod
 
-docker push joycelin1600/cat-ui:${GIT_REV}
-
-# tell kubernetes to use newest UI image
-kubectl apply -f deployment-ui-prod.yaml
-kubectl set image deployment/cat-ui cat-ui=joycelin1600/cat-ui:${GIT_REV}
+docker push ${DOCKER_HUB_USERNAME}/cat-ui:${GIT_REV}
 
 # deploy backend to kubernetes
+# will look for a kube config, and if none exists prompt to set up via kubesail
 npx deploy-to-kube
+
+# deploy frontend and tell kubernetes to use newest UI image
+kubectl apply -f deployment-ui-prod.yaml
+kubectl set image deployment/cat-ui cat-ui=${DOCKER_HUB_USERNAME}/cat-ui:${GIT_REV}
