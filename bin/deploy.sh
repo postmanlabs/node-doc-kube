@@ -5,7 +5,7 @@ set -e
 
 . .env
 
-npm build
+npm run build
 
 # ********* RUN TESTS *********
 
