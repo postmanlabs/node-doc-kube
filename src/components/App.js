@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import '../css/App.css';
 
-const redirectTarget = process.env.NODE_ENV == 'production' ? process.env.REACT_APP_HOST : 'http://localhost:5500';
+const redirectTarget = process.env.NODE_ENV == 'development' ? 'http://localhost:5500' : process.env.REACT_APP_HOST;
 
 class App extends Component {
 
@@ -13,9 +13,6 @@ class App extends Component {
     encodedUrl: "",
     copied: false
   }
-
-  host = window.location.hostname;
-  port = window.location.port;
   
   handleChange = (event) => {
     this.setState({
