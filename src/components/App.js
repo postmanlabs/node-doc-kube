@@ -59,7 +59,7 @@ class App extends Component {
       <div className="App">
 
         <div className="nav">
-          <a href="/" className="nav-brand">catURL</a>
+          <a href="/" className="nav-brand">catURL 2</a>
         </div>
 
         <a href="https://github.com/loopDelicious/cat-kube-stateless">
