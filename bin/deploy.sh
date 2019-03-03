@@ -10,6 +10,7 @@ npm run build
 # ********* RUN TESTS *********
 
 # run API tests against a local server, failed test(s) return a 1 (error) and terminate this script
+# if you don't plan to run any Postman tests, ensure this entire section is commented out
 
 # # [GOOD PRACTICE] run your tests against a local server
 # # requires your Postman collection and environment files to be located within the project directory
@@ -28,7 +29,7 @@ docker build -f Dockerfile . -t backend
 docker run -p 5501:5500 -d --name test_backend_run backend
 # use a Postman environment switch tests over to run against container on http://localhost:5501
 set +e
-newman run https://api.getpostman.com/collections/1559645-9f5aa83b-666d-41ef-9b91-6c3ec25ef789?apikey=${POSTMAN_API_KEY} -e https://api.getpostman.com/environments/1559645-be4012af-b66d-420b-8464-665618e9c48e?apikey=${POSTMAN_API_KEY} --ignore-redirects
+newman run https://api.getpostman.com/collections/1559645-9f5aa83b-666d-41ef-9b91-6c3ec25ef789?apikey=${POSTMAN_API_KEY} -e https://api.getpostman.com/environments/1559645-b5c093e1-bf72-4f7e-b18a-11263f21ec32?apikey=${POSTMAN_API_KEY} --ignore-redirects
 EXIT_CODE=$?
 docker stop test_backend_run
 docker rm test_backend_run

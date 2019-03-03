@@ -59,10 +59,10 @@ class App extends Component {
       <div className="App">
 
         <div className="nav">
-          <a href="/" className="nav-brand">catURL 2</a>
+          <a href="/" className="nav-brand">catURL</a>
         </div>
 
-        <a href="https://github.com/loopDelicious/cat-kube-stateless">
+        <a href="https://github.com/postmanlabs/node-doc-kube">
           <img className="snipe" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" />
         </a>
 
@@ -102,7 +102,7 @@ class App extends Component {
             </div>
             : null }
 
-          <div id="attribution">created by: <a href='http://www.github.com/loopDelicious'>Joyce Lin</a></div>
+          <div id="attribution">created by: <a href='https://github.com/postmanlabs'>Postman</a></div>
           <div className='disclaimer'>
             <span>Intended for entertainment use only. No guarantees made. No one endorses anything contained in the URLs. 
               <p> {"\n"}{"\n"} </p>
