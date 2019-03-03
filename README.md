@@ -18,9 +18,3 @@ This project was originally published in [Deploying a scalable web application w
 1. **Deploy**: Run the deployment script
     `npm run deploy // run API tests, then deploy frontend and backend to production`
 For the deployment, I used a hosted Kubernetes provider called [Kubesail](https://kubesail.com/) that creates a free managed namespace. However, the underlying deployment utility [`npx deploy-to-kube`](https://github.com/kubesail/deploy-to-kube) supports any Kubernetes cluster. By running it inside your app's directory, this utility will automatically generate a Dockerfile (if it doesn't exist), build and push deployment images, generate Kubernetes configuration files (if it doesn't exist), and trigger a deployment on your Kubernetes cluster. 
-
-The deployment script will prompt you to answer [a series of questions](https://kubesail.com/blog/deploying-node-apps-the-right-way), such as:
-```
-    ? What is your application's entrypoint? e.g. src/services/server.js
-    ? Which protocol does your application speak? e.g. http
-```
