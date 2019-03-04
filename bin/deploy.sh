@@ -49,7 +49,7 @@ docker push ${DOCKER_HUB_USERNAME}/cat-ui:${GIT_REV}
 
 # deploy backend to kubernetes
 # will look for a kube config, and if none exists prompt to set up via kubesail
-npx deploy-to-kube
+npx deploy-to-kube --no-confirm
 
 # deploy frontend and tell kubernetes to use newest UI image
 kubectl apply -f deployment-ui-prod.yaml
