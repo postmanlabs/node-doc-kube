@@ -1,5 +1,3 @@
-# JOYCE DELETE THIS FILE ~/.kube/config THEN re run deploy.sh
-
 # terminate on any error
 set -e
 
