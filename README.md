@@ -2,13 +2,16 @@ This project was originally published in [Deploying a scalable web application w
 
 ### Pre-requisites for local development
 1. Download and install [Node.js](https://nodejs.org/en/) and a package manager like [npm](https://www.npmjs.com/), and
+1. Install yarn globally with `npm install -g yarn`  
 1. A container platform like [Docker](https://www.docker.com/get-started). Remember to start Docker on your machine.
 
 ### For Development
 
     npm install // install dependencies
-    npm start // start app on 3000
-    npm run start-server // start server on 5500
+    npm start // start web app on 3000
+    npm run start-server // start backend server on 5500
+    
+    open http://localhost:3000 // open web app
 
 ### For Production
 
