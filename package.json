@@ -43,6 +43,6 @@
     }
   },
   "devDependencies": {
-    "newman": "^4.4.0"
+    "newman": "^4.5.5"
   }
 }
