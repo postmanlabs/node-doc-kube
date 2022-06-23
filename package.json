@@ -6,7 +6,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "fs": "0.0.1-security",
-    "nodemon": "^1.18.10",
+    "nodemon": "^2.0.17",
     "prettier": "^1.16.4",
     "react": "^16.7.0",
     "react-copy-to-clipboard": "^5.0.1",
